@@ -2,6 +2,7 @@ package pokergame;
 
 import java.util.Vector;
 
+
 public class DealerAI {
 	
 	 Hand hand;
@@ -36,6 +37,11 @@ public class DealerAI {
             
 		if (currentrank >= 4)
 				return swapcardsnocards;
+		
+		if (currentrank == 2){
+			Double bestrankdiffonecard = rankDiffSwapOneCard();
+			return swapcardstwocards;
+		}
 		 
 		Double bestrankdiffonecard = rankDiffSwapOneCard();
 		
@@ -214,10 +220,12 @@ public class DealerAI {
 					else temphand.add(hand.get(k));
 					}
 				Hand temphand2 = new Hand();
+				
 				for (int z = 0; z < hand.size(); z++)
 					temphand2.add(temphand.get(z));
-				temphand2.add(hand.get(cardi));
+				temphand.add(hand.get(cardi));
 				SpecialDeck tempdeck2 = new SpecialDeck(temphand2);
+				
 				for (int l = 0; l < tempdeck2.cardsInDeck(); l++){
 					temphand.setElementAt(tempdeck2.get(l), cardm);
 				Hand temphand3 = new Hand();
@@ -227,7 +235,6 @@ public class DealerAI {
 					temphand3.add(hand.get(cardm));
 					SpecialDeck tempdeck3 = new SpecialDeck(temphand3);
 				for (int m = 0; m < tempdeck3.cardsInDeck(); m ++){
-					
 					temphand.setElementAt(tempdeck3.get(m), cardn);
 					int temphandrank = HandEvaluator.assessHand(temphand);
 					int temprankdiff = temphandrank - currentrank;

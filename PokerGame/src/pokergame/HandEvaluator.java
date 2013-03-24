@@ -15,36 +15,28 @@ public abstract class HandEvaluator {
 
 private static int counter = 0;
     
-   public static int assessHand(Hand hand) // returns a rank between 0 and 6
-   {          
-Hand testHand = new Hand();
-testHand.add(hand.get(0));
-for(int k = 1; k < hand.size(); k++){
-testHand.add(hand.get(k));
-for(int i = k; i-1 >= 0 ;i--){
-if (testHand.get(i).getValue() < testHand.get(i-1).getValue())
-{
-    Card card1 = testHand.get(i);
-    Card card2 = testHand.get(i-1);
-    testHand.setElementAt(card2, i);
-    testHand.setElementAt(card1, i-1);
-}
-}
-}
+   public static int assessHand(Hand hand){
+	   Hand testHand = new Hand();
+	   testHand.add(hand.get(0));
+	   for(int k = 1; k < hand.size(); k++){
+		   testHand.add(hand.get(k));
+		   for(int i = k; i-1 >= 0 ;i--){
+			   if (testHand.get(i).getValue() < testHand.get(i-1).getValue()){
+				   Card card1 = testHand.get(i);
+				   Card card2 = testHand.get(i-1);
+				   testHand.setElementAt(card2, i);
+				   testHand.setElementAt(card1, i-1);
+			   }
+		   }
+	   }
       
-       boolean straight = isThereAStraight(testHand);
-       boolean flush = isThereAFlush(testHand);
-       boolean four = isThereAFour(testHand);
-       boolean two_pair =isThereTwoPair(testHand);
-       boolean three = isThereAThree(testHand);
-       boolean pair = isThereAPair(testHand);
-       
-       if (four) return 6;
-       if (flush) return 5;
-       if (straight) return 4;
-       if (three) return 3;
-       if (two_pair) return 2;
-       if (pair) return 1;
+	      
+       if (isThereAFour(testHand)) return 6;
+       if (isThereAFlush(testHand)) return 5;
+       if (isThereAStraight(testHand)) return 4;
+       if (isThereAThree(testHand)) return 3;
+       if (isThereTwoPair(testHand)) return 2;
+       if (isThereAPair(testHand)) return 1;
   
        return 0;
        
