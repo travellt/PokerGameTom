@@ -9,9 +9,10 @@ public class DealerAI {
 	 Vector<Card> swapcardstwocards;
 	 Vector<Card> swapcardsthreecards;
 	 Vector<Card> swapcardsnocards = new Vector<Card>();
-	int currentrank;
-	
-        public DealerAI(Hand myhand) {  
+	 int currentrank;
+	 
+	 
+     public DealerAI(Hand myhand) {  
 		this.hand = new Hand(); //create new Hand so doesn't alter it
 		for (int k = 0; k < myhand.size(); k++)  
 			hand.add(myhand.get(k));
@@ -33,7 +34,7 @@ public class DealerAI {
              * hand for making the specified number of changes
              */ 
             
-		 if (currentrank >= 4)
+		if (currentrank >= 4)
 				return swapcardsnocards;
 		 
 		Double bestrankdiffonecard = rankDiffSwapOneCard();
@@ -55,7 +56,7 @@ public class DealerAI {
 	
 	private  Double rankDiffSwapOneCard() {
 	
-    Double rankdiffonecard = 0.0; // rank difference
+    Double rankdiffonecard = 0.0;
 	Card bestcardtoswap = null;
 	
 
@@ -150,7 +151,7 @@ public class DealerAI {
             
 		Double rankdiffifswapped = 0.0;
 		SpecialDeck tempdeck = new SpecialDeck(hand);
-		for (int j = 0; j < 47 ; j++){
+		for (int j = 0; j < tempdeck.cardsInDeck() ; j++){
 			Hand temphand = new Hand();
 			for (int k = 0; k < hand.size(); k++){
 				if (k == cardi)
@@ -175,7 +176,7 @@ public class DealerAI {
 		
 		Double rankdiffifswapped = 0.0;
 		SpecialDeck tempdeck = new SpecialDeck(hand);
-		for (int j = 0; j < 47 ; j++){
+		for (int j = 0; j < tempdeck.cardsInDeck() ; j++){
 			Hand temphand = new Hand();
 			for (int k = 0; k < hand.size(); k++){
 				if (k == cardi)
@@ -188,7 +189,7 @@ public class DealerAI {
 			temphand2.add(hand.get(cardi));
 			SpecialDeck tempdeck2 = new SpecialDeck(temphand2);
 			
-				for (int l = 0; l < 46; l++){
+				for (int l = 0; l < tempdeck2.cardsInDeck(); l++){
 					
 				temphand.setElementAt(tempdeck2.get(l), cardm);
 				int temphandrank = HandEvaluator.assessHand(temphand);
@@ -196,7 +197,7 @@ public class DealerAI {
 				rankdiffifswapped = rankdiffifswapped + temprankdiff;
 				}	
 		}		
-		rankdiffifswapped = rankdiffifswapped / (47*46);			
+		rankdiffifswapped = rankdiffifswapped / (46*47);			
 		return rankdiffifswapped;
 	}	
 	
@@ -205,7 +206,7 @@ public class DealerAI {
 			
 		Double rankdiffifswapped = 0.0;
 		SpecialDeck tempdeck = new SpecialDeck(hand);
-			for (int j = 0; j < 47 ; j++){
+			for (int j = 0; j < tempdeck.cardsInDeck() ; j++){
                             Hand temphand = new Hand();
 				for (int k = 0; k < hand.size(); k++){
 					if (k == cardi)
@@ -217,7 +218,7 @@ public class DealerAI {
 					temphand2.add(temphand.get(z));
 				temphand2.add(hand.get(cardi));
 				SpecialDeck tempdeck2 = new SpecialDeck(temphand2);
-				for (int l = 0; l < 46; l++){
+				for (int l = 0; l < tempdeck2.cardsInDeck(); l++){
 					temphand.setElementAt(tempdeck2.get(l), cardm);
 				Hand temphand3 = new Hand();
 				for (int z = 0; z < hand.size(); z++)
@@ -225,7 +226,7 @@ public class DealerAI {
 					temphand3.add(hand.get(cardi));
 					temphand3.add(hand.get(cardm));
 					SpecialDeck tempdeck3 = new SpecialDeck(temphand3);
-				for (int m = 0; m < 45; m ++){
+				for (int m = 0; m < tempdeck3.cardsInDeck(); m ++){
 					
 					temphand.setElementAt(tempdeck3.get(m), cardn);
 					int temphandrank = HandEvaluator.assessHand(temphand);
